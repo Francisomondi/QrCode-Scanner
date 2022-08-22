@@ -1,5 +1,6 @@
 const express = require("express")
 const app = express()
+const qr = require("qrcode")
 const port = process.env.port || 3000;
 const bodyparser = require("body-parser")
 
@@ -11,6 +12,22 @@ app.use(bodyparser.json())
 
 app.get("/", (req, res) => {
     res.render("index")
+})
+
+app.post("/scan", (req, res) => {
+    const url = req.body.url
+
+    if (url.length === 0) {
+        res.send("no url inserted")
+    }
+    qr.toDataURL(url, (err, data) => {
+        if (err) {
+            console.log(err)
+        }
+        console.log(data)
+    })
+
+
 })
 
 
