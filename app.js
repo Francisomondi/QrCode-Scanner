@@ -24,7 +24,9 @@ app.post("/scan", (req, res) => {
         if (err) {
             console.log(err)
         }
-        console.log(data)
+        res.render("scan", {
+            data
+        })
     })
 
 
